@@ -2,43 +2,51 @@
 // Initiatives.astro
 import pkg from "lucide-react";
 
+import { Image } from 'astro:assets';
+import serviceHvac from '../assets/images/service_hvac.jpg';
+import servicePool from '../assets/images/service_pool.jpg';
+import serviceBwro from '../assets/images/service_bwro.jpg';
+import serviceSolar from '../assets/images/service_solar.jpg';
+import serviceMep from '../assets/images/service_mep.jpg';
+import serviceFilter from '../assets/images/service_filter.jpg';
+
 const { ArrowRight, Settings, Droplets, Droplet, Sun, Zap, Filter } = pkg;
 
 const services = [
   {
     title: "HVAC &<br/>Cooling Tower",
     desc: "Perawatan berkala dan perbaikan sistem tata udara sentral serta menara pendingin guna menjamin efisiensi pendinginan maksimal.",
-    image: "/images/service_hvac.jpg",
+    image: serviceHvac,
     icon: Settings
   },
   {
     title: "Swimming Pool<br/>Maintenance",
     desc: "Layanan pembersihan menyeluruh, penyeimbangan kimia air, dan perawatan rutin pompa agar kualitas air kolam senantiasa higienis.",
-    image: "/images/service_pool.jpg",
+    image: servicePool,
     icon: Droplets
   },
   {
     title: "RO Water<br/>Systems",
     desc: "Solusi cerdas pengolahan air payau dan air laut menjadi pasokan air bersih siap pakai dengan teknologi filtrasi membran modern.",
-    image: "/images/service_bwro.jpg",
+    image: serviceBwro,
     icon: Droplet
   },
   {
     title: "Solar Panel<br/>Systems",
     desc: "Pemasangan presisi dan pemeliharaan rutin panel surya sebagai solusi energi terbarukan yang sangat ramah lingkungan dan efisien.",
-    image: "/images/service_solar.jpg",
+    image: serviceSolar,
     icon: Sun
   },
   {
     title: "MEP<br/>Installation",
     desc: "Instalasi dan perbaikan sistem mekanikal, kelistrikan, serta plumbing komersial yang teruji aman dan sesuai dengan standar industri terkini.",
-    image: "/images/service_mep.jpg",
+    image: serviceMep,
     icon: Zap
   },
   {
     title: "Water Filter<br/>& F&B",
     desc: "Penyewaan mesin filter air dan peralatan F&B skala profesional yang dilengkapi dengan jaminan dukungan pemeliharaan secara penuh.",
-    image: "/images/service_filter.jpg",
+    image: serviceFilter,
     icon: Filter
   }
 ];
@@ -58,7 +66,7 @@ const services = [
             const IconComponent = service.icon;
             return (
               <div class="w-[300px] h-[480px] rounded-2xl overflow-hidden relative group/card cursor-pointer">
-                <img src={service.image} alt={service.title.replace('<br/>', ' ')} class="absolute inset-0 w-full h-full object-cover group-hover/card:scale-105 transition duration-700" />
+                <Image src={service.image} alt={service.title.replace('<br/>', ' ')} loading="lazy" class="absolute inset-0 w-full h-full object-cover group-hover/card:scale-105 transition duration-700" />
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
                 <div class="absolute bottom-0 left-0 p-8 w-full">
                   <div class="w-10 h-10 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center mb-4 text-white">
@@ -78,7 +86,7 @@ const services = [
             const IconComponent = service.icon;
             return (
               <div class="w-[300px] h-[480px] rounded-2xl overflow-hidden relative group/card cursor-pointer">
-                <img src={service.image} alt={service.title.replace('<br/>', ' ')} class="absolute inset-0 w-full h-full object-cover group-hover/card:scale-105 transition duration-700" />
+                <Image src={service.image} alt={service.title.replace('<br/>', ' ')} loading="lazy" class="absolute inset-0 w-full h-full object-cover group-hover/card:scale-105 transition duration-700" />
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
                 <div class="absolute bottom-0 left-0 p-8 w-full">
                   <div class="w-10 h-10 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center mb-4 text-white">

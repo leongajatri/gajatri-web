@@ -4,7 +4,8 @@ import pkg from "lucide-react";
 
 const { CheckCircle2, ArrowRight } = pkg;
 
-const aboutImg = '/images/about_team.jpg';
+import { Image } from 'astro:assets';
+import aboutImg from '../assets/images/about_team.jpg';
 ---
 <section id="tentang-kami" class="max-w-[1400px] mx-auto px-6 pt-8 pb-16 md:pt-12 md:pb-24 scroll-mt-20">
   <div class="flex flex-col lg:flex-row gap-12 lg:gap-16 items-center">
@@ -12,7 +13,7 @@ const aboutImg = '/images/about_team.jpg';
     {/* Left: Image */}
     <div class="lg:w-1/2 relative reveal-up">
       <div class="relative rounded-3xl overflow-hidden aspect-[4/3]">
-        <img src={aboutImg} alt="Tim Gajatri Indo Service" class="w-full h-full object-cover" />
+        <Image src={aboutImg} alt="Tim Gajatri Indo Service" class="w-full h-full object-cover" loading="lazy" />
         <div class="absolute inset-0 bg-gradient-to-t from-[#0A1128]/80 to-transparent"></div>
         <div class="absolute bottom-0 left-0 p-8">
           <h3 class="text-3xl font-extrabold text-white mb-2">PT. Gajatri Indo Service</h3>
