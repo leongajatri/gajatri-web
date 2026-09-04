@@ -1,0 +1,189 @@
+---
+import pkg from "lucide-react";
+const { Send, Phone, MapPin, Clock, Mail, ChevronDown } = pkg;
+---
+
+<section id="kontak" class="max-w-[1400px] mx-auto px-6 pt-6 pb-12 md:pt-4 md:pb-16 scroll-mt-24">
+  <div class="flex flex-col lg:flex-row gap-16">
+    
+    {/* Left: Contact Info */}
+    <div class="lg:w-1/3">
+      <h2 class="text-4xl lg:text-[3.5rem] font-extrabold text-[#0A1128] mb-4 leading-[1.1] tracking-tight reveal-up">Hubungi <span class="text-[#083d8d]">Kami</span></h2>
+      <p class="text-gray-600 mb-8 text-base md:text-lg leading-relaxed font-normal max-w-md reveal-up delay-100">
+        Punya masalah dengan sistem pendingin, instalasi pipa, atau butuh perawatan kolam renang? Tim ahli kami siap membantu Anda.
+      </p>
+      
+      <div class="space-y-6 reveal-up delay-200">
+        <div class="flex items-start space-x-4">
+          <div class="w-12 h-12 bg-[#F0F5FF] rounded-xl flex items-center justify-center text-[#083d8d] shrink-0">
+            <Phone className="w-5 h-5" />
+          </div>
+          <div>
+            <h4 class="font-bold text-[#0A1128] mb-1">Telepon / WhatsApp</h4>
+            <p class="text-sm text-gray-500 font-medium">+62 819-3252-3333</p>
+          </div>
+        </div>
+        
+        <div class="flex items-start space-x-4">
+          <div class="w-12 h-12 bg-[#F0F5FF] rounded-xl flex items-center justify-center text-[#083d8d] shrink-0">
+            <MapPin className="w-5 h-5" />
+          </div>
+          <div>
+            <h4 class="font-bold text-[#0A1128] mb-1">Kantor Pusat</h4>
+            <p class="text-sm text-gray-500 font-medium">Jl. Bedugul No. 134 B, Sidakarya, Denpasar Selatan, Bali</p>
+          </div>
+        </div>
+        
+        <div class="flex items-start space-x-4">
+          <div class="w-12 h-12 bg-[#F0F5FF] rounded-xl flex items-center justify-center text-[#083d8d] shrink-0">
+            <Clock className="w-5 h-5" />
+          </div>
+          <div>
+            <h4 class="font-bold text-[#0A1128] mb-1">Jam Operasional</h4>
+            <p class="text-sm text-gray-500 font-medium">Senin - Sabtu: 08:00 - 17:00</p>
+          </div>
+        </div>
+        
+        <div class="flex items-start space-x-4">
+          <div class="w-12 h-12 bg-[#F0F5FF] rounded-xl flex items-center justify-center text-[#083d8d] shrink-0">
+            <Mail className="w-5 h-5" />
+          </div>
+          <div>
+            <h4 class="font-bold text-[#0A1128] mb-1">Email</h4>
+            <p class="text-sm text-gray-500 font-medium">leon@gajatri.ic</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    {/* Right: Order Form */}
+    <div class="lg:w-2/3 reveal-up delay-300">
+      <div class="bg-white rounded-3xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100">
+        <h3 class="text-2xl font-extrabold text-[#0A1128] mb-4 tracking-tight">Formulir Pesanan Maintenance</h3>
+        
+        <form id="orderForm" class="space-y-3">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="space-y-2">
+              <label for="name" class="block text-sm font-medium text-gray-700">Nama Lengkap / Instansi</label>
+              <input type="text" id="name" required class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#083d8d]/20 focus:border-[#083d8d] transition" placeholder="Masukkan nama Anda" />
+            </div>
+            
+            <div class="space-y-2">
+              <label for="phone" class="block text-sm font-medium text-gray-700">No. WhatsApp</label>
+              <input type="tel" id="phone" required class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#083d8d]/20 focus:border-[#083d8d] transition" placeholder="Contoh: 08123456789" />
+            </div>
+          </div>
+          
+          <div class="space-y-2">
+            <label for="service" class="block text-sm font-medium text-gray-700">Layanan yang Dibutuhkan</label>
+            <div class="relative" id="custom-select-container">
+              <input type="hidden" id="service" value="">
+              
+              <button type="button" id="custom-select-button" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-left focus:outline-none transition text-gray-500 font-medium cursor-pointer flex justify-between items-center">
+                <span id="custom-select-text">Pilih Layanan</span>
+                <ChevronDown id="custom-select-icon" className="w-4 h-4 text-gray-500 transition-transform duration-200" />
+              </button>
+              
+              <ul id="custom-select-dropdown" class="absolute z-10 w-full mt-2 bg-white border border-gray-100 rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.08)] py-2 hidden opacity-0 transition-opacity duration-200 ease-in-out max-h-60 overflow-auto">
+                <li class="px-4 py-2.5 text-sm text-gray-700 hover:bg-[#F0F5FF] hover:text-[#083d8d] cursor-pointer transition font-medium" data-value="HVAC & Cooling Tower Maintenance">HVAC & Cooling Tower Maintenance</li>
+                <li class="px-4 py-2.5 text-sm text-gray-700 hover:bg-[#F0F5FF] hover:text-[#083d8d] cursor-pointer transition font-medium" data-value="Swimming Pool Maintenance">Swimming Pool Maintenance</li>
+                <li class="px-4 py-2.5 text-sm text-gray-700 hover:bg-[#F0F5FF] hover:text-[#083d8d] cursor-pointer transition font-medium" data-value="BWRO & SWRO">Brackish Water & Seawater Reverse Osmosis</li>
+                <li class="px-4 py-2.5 text-sm text-gray-700 hover:bg-[#F0F5FF] hover:text-[#083d8d] cursor-pointer transition font-medium" data-value="Solar Panel & Solar Cell Systems">Solar Panel & Solar Cell Systems</li>
+                <li class="px-4 py-2.5 text-sm text-gray-700 hover:bg-[#F0F5FF] hover:text-[#083d8d] cursor-pointer transition font-medium" data-value="Mechanical, Electrical, & Plumbing (MEP)">Mechanical, Electrical, & Plumbing (MEP)</li>
+                <li class="px-4 py-2.5 text-sm text-gray-700 hover:bg-[#F0F5FF] hover:text-[#083d8d] cursor-pointer transition font-medium" data-value="Water Filter & F&B Equipment Rental">Water Filter & F&B Equipment Rental</li>
+                <li class="px-4 py-2.5 text-sm text-gray-700 hover:bg-[#F0F5FF] hover:text-[#083d8d] cursor-pointer transition font-medium" data-value="Lainnya">Lainnya / Konsultasi</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="space-y-2">
+            <label for="message" class="block text-sm font-medium text-gray-700">Detail Masalah / Permintaan</label>
+            <textarea id="message" rows="3" required class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#083d8d]/20 focus:border-[#083d8d] transition resize-none font-medium" placeholder="Ceritakan detail masalah atau kebutuhan maintenance Anda..."></textarea>
+          </div>
+          
+          <button type="submit" class="w-full bg-[#083d8d] text-white rounded-xl py-3.5 font-bold text-sm hover:bg-[#062b66] transition flex items-center justify-center space-x-2">
+            <span>Kirim Pesanan via WhatsApp</span>
+            <Send className="w-4 h-4" />
+          </button>
+        </form>
+      </div>
+    </div>
+    
+  </div>
+</section>
+
+<script>
+  // Form submission
+  const form = document.getElementById('orderForm');
+  if (form) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const name = (document.getElementById('name') as HTMLInputElement).value;
+      const phone = (document.getElementById('phone') as HTMLInputElement).value;
+      const service = (document.getElementById('service') as HTMLInputElement).value;
+      const message = (document.getElementById('message') as HTMLTextAreaElement).value;
+      
+      if (!service) {
+        alert('Silakan pilih layanan terlebih dahulu.');
+        return;
+      }
+      
+      const waNumber = "6281932523333";
+      const text = `Halo Admin PT. Gajatri Indo Service,%0A%0ASaya ingin memesan layanan / konsultasi dengan detail berikut:%0A%0A*Nama/Instansi:* ${name}%0A*No. HP/WA:* ${phone}%0A*Layanan:* ${service}%0A*Detail Masalah:*%0A${message}%0A%0AMohon info lebih lanjut. Terima kasih.`;
+      
+      window.open(`https://wa.me/${waNumber}?text=${text}`, '_blank');
+    });
+  }
+
+  // Custom Select Logic
+  const selectContainer = document.getElementById('custom-select-container');
+  const selectButton = document.getElementById('custom-select-button');
+  const selectText = document.getElementById('custom-select-text');
+  const selectDropdown = document.getElementById('custom-select-dropdown');
+  const selectIcon = document.getElementById('custom-select-icon');
+  const hiddenInput = document.getElementById('service');
+  
+  if (selectButton && selectDropdown && selectContainer) {
+    const options = selectDropdown.querySelectorAll('li');
+    
+    selectButton.addEventListener('click', () => {
+      const isHidden = selectDropdown.classList.contains('hidden');
+      if (isHidden) {
+        selectDropdown.classList.remove('hidden');
+        setTimeout(() => selectDropdown.classList.remove('opacity-0'), 10);
+        if (selectIcon) selectIcon.style.transform = 'rotate(180deg)';
+        selectButton.classList.add('border-[#083d8d]', 'ring-2', 'ring-[#083d8d]/20');
+      } else {
+        closeDropdown();
+      }
+    });
+
+    options.forEach(option => {
+      option.addEventListener('click', () => {
+        if (selectText) {
+          selectText.textContent = option.textContent;
+          selectText.classList.remove('text-gray-500');
+          selectText.classList.add('text-gray-700');
+        }
+        if (hiddenInput) {
+          (hiddenInput as HTMLInputElement).value = option.getAttribute('data-value') || '';
+        }
+        closeDropdown();
+      });
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!selectContainer.contains(e.target as Node)) {
+        closeDropdown();
+      }
+    });
+
+    function closeDropdown() {
+      selectDropdown?.classList.add('opacity-0');
+      setTimeout(() => selectDropdown?.classList.add('hidden'), 200);
+      if (selectIcon) selectIcon.style.transform = 'rotate(0deg)';
+      selectButton?.classList.remove('border-[#083d8d]', 'ring-2', 'ring-[#083d8d]/20');
+    }
+  }
+</script>

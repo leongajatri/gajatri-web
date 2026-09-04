@@ -1,0 +1,75 @@
+---
+// Mission.astro
+import pkg from "lucide-react";
+
+const { CheckCircle2, ArrowRight } = pkg;
+
+const aboutImg = '/images/about_team.jpg';
+---
+<section id="tentang-kami" class="max-w-[1400px] mx-auto px-6 pt-8 pb-16 md:pt-12 md:pb-24 scroll-mt-20">
+  <div class="flex flex-col lg:flex-row gap-12 lg:gap-16 items-center">
+    
+    {/* Left: Image */}
+    <div class="lg:w-1/2 relative reveal-up">
+      <div class="relative rounded-3xl overflow-hidden aspect-[4/3]">
+        <img src={aboutImg} alt="Tim Gajatri Indo Service" class="w-full h-full object-cover" />
+        <div class="absolute inset-0 bg-gradient-to-t from-[#0A1128]/80 to-transparent"></div>
+        <div class="absolute bottom-0 left-0 p-8">
+          <h3 class="text-3xl font-extrabold text-white mb-2">PT. Gajatri Indo Service</h3>
+          <p class="text-white/80 font-medium">Mitra Terpercaya Anda</p>
+        </div>
+      </div>
+      
+      {/* Decorative element */}
+      <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-[#F0F5FF] rounded-full -z-10 blur-2xl"></div>
+      <div class="absolute -top-6 -left-6 w-32 h-32 bg-[#083d8d]/10 rounded-full -z-10 blur-2xl"></div>
+    </div>
+
+    {/* Right: Text & Benefits */}
+    <div class="lg:w-1/2 flex flex-col py-2">
+      <h2 class="text-4xl lg:text-[3rem] font-extrabold mb-6 text-[#0A1128] leading-[1.1] tracking-tight reveal-up delay-200">
+        Solusi Perawatan & Instalasi <span class="text-[#083d8d]">Terpercaya</span>
+      </h2>
+      
+      <p class="text-gray-600 text-base lg:text-lg leading-relaxed mb-8 font-normal reveal-up delay-300">
+        PT. Gajatri Indo Service adalah penyedia layanan komprehensif yang berdedikasi untuk menjaga performa optimal sistem fasilitas Anda. Kami memadukan keahlian teknis dengan pelayanan prima untuk memberikan ketenangan pikiran bagi setiap klien.
+      </p>
+      
+      {/* Benefits List */}
+      <div class="space-y-6 mb-8 reveal-up delay-400">
+        <div class="flex items-start space-x-4">
+          <div class="w-10 h-10 bg-[#F0F5FF] rounded-xl flex items-center justify-center shrink-0">
+            <CheckCircle2 className="w-5 h-5 text-[#083d8d]" />
+          </div>
+          <div>
+            <h4 class="font-bold text-[#0A1128]">Solusi Komprehensif</h4>
+            <p class="text-sm text-gray-500 mt-1">Menyediakan layanan terlengkap (one-stop solution) untuk menjawab segala kebutuhan perawatan dan instalasi Anda.</p>
+          </div>
+        </div>
+        
+        <div class="flex items-start space-x-4">
+          <div class="w-10 h-10 bg-[#F0F5FF] rounded-xl flex items-center justify-center shrink-0">
+            <CheckCircle2 className="w-5 h-5 text-[#083d8d]" />
+          </div>
+          <div>
+            <h4 class="font-bold text-[#0A1128]">Kualitas Terjamin</h4>
+            <p class="text-sm text-gray-500 mt-1">Memberikan standar mutu tertinggi di setiap pengerjaan yang didukung oleh tim teknisi profesional berpengalaman.</p>
+          </div>
+        </div>
+        
+        <div class="flex items-start space-x-4">
+          <div class="w-10 h-10 bg-[#F0F5FF] rounded-xl flex items-center justify-center shrink-0">
+            <CheckCircle2 className="w-5 h-5 text-[#083d8d]" />
+          </div>
+          <div>
+            <h4 class="font-bold text-[#0A1128]">Kepercayaan Penuh</h4>
+            <p class="text-sm text-gray-500 mt-1">Berkomitmen penuh pada layanan yang transparan, dapat diandalkan, dan bergaransi demi kepuasan klien.</p>
+          </div>
+        </div>
+      </div>
+      
+
+
+    </div>
+  </div>
+</section>

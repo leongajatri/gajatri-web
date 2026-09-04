@@ -1,0 +1,28 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Hero from "../components/Hero.astro";
+import Mission from "../components/Mission.astro";
+import Initiatives from "../components/Initiatives.astro";
+import Technology from "../components/Technology.astro";
+import ContactForm from "../components/ContactForm.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<Layout title="PT. Gajatri Indo Service">
+  <div class="bg-white min-h-screen text-[#0A1128] font-sans selection:bg-[#083d8d] selection:text-white pb-12">
+    
+    <Header />
+
+    <main id="beranda" class="space-y-16 scroll-mt-32">
+      <Hero />
+      <Mission />
+      <Initiatives />
+      <Technology />
+      <ContactForm />
+    </main>
+
+    <Footer />
+
+  </div>
+</Layout>
