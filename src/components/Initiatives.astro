@@ -101,10 +101,10 @@ const servicesClient = services.map(s => ({
     <div class="lg:w-2/3 relative group overflow-hidden mask-fade">
       
       {/* Cards Container */}
-      <div class="flex gap-6 w-max animate-scroll">
+      <div class="flex gap-6 w-max" id="scroll-track">
         
         {/* --- Set 1 --- */}
-        <div class="flex gap-6 shrink-0">
+        <div class="flex gap-6 shrink-0" id="scroll-set-1">
           {services.map((service, index) => {
             const IconComponent = service.icon;
             return (
@@ -287,6 +287,78 @@ const servicesClient = services.map(s => ({
         }
       });
     }
+
+    // Interactive Hover Scroll Logic
+    const track = document.getElementById('scroll-track');
+    const set1 = document.getElementById('scroll-set-1');
+    
+    if (track && set1) {
+      const container = track.parentElement;
+      let currentTranslate = 0;
+      let targetSpeed = -0.5; // Kecepatan normal jalan ke kiri
+      let currentSpeed = -0.5;
+      let isHovered = false;
+      let animationFrameId;
+
+      // Fungsi untuk menghitung lebar setengah konten
+      let halfWidth = set1.offsetWidth + 24; // 24px = gap-6
+      
+      window.addEventListener('resize', () => {
+        halfWidth = set1.offsetWidth + 24;
+      });
+
+      container.addEventListener('mouseenter', () => {
+        isHovered = true;
+      });
+
+      container.addEventListener('mouseleave', () => {
+        isHovered = false;
+        targetSpeed = -0.5; // Kembali ke kecepatan normal saat mouse keluar
+      });
+
+      container.addEventListener('mousemove', (e) => {
+        if (!isHovered) return;
+        
+        const rect = container.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        
+        // Normalisasi posisi X dari -1 (kiri) ke 1 (kanan)
+        const normalizedX = (x / rect.width) * 2 - 1;
+        
+        const deadzone = 0.15; // Area di tengah di mana slider berhenti
+        
+        if (Math.abs(normalizedX) < deadzone) {
+          targetSpeed = 0;
+        } else {
+          // Kekuatan kecepatan (dari 0 hingga 1)
+          const strength = (Math.abs(normalizedX) - deadzone) / (1 - deadzone);
+          // Jika kursor di kanan (>0), geser ke kiri (negatif)
+          // Jika kursor di kiri (<0), geser ke kanan (positif)
+          const direction = normalizedX > 0 ? -1 : 1;
+          targetSpeed = direction * strength * 4; // Max speed 4
+        }
+      });
+
+      function animateScroll() {
+        // Efek smooth / perlambatan & percepatan (lerp)
+        currentSpeed += (targetSpeed - currentSpeed) * 0.05;
+        currentTranslate += currentSpeed;
+
+        // Infinite loop (Wrap around)
+        if (currentTranslate <= -halfWidth) {
+          currentTranslate += halfWidth;
+        } else if (currentTranslate >= 0) {
+          currentTranslate -= halfWidth;
+        }
+
+        track.style.transform = `translateX(${currentTranslate}px)`;
+        animationFrameId = requestAnimationFrame(animateScroll);
+      }
+      
+      // Mulai animasi
+      animateScroll();
+    }
+
   });
 </script>
 
@@ -300,16 +372,6 @@ const servicesClient = services.map(s => ({
     scrollbar-width: none;  /* Firefox */
   }
 
-  @keyframes scroll {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(calc(-50% - 12px)); }
-  }
-  .animate-scroll {
-    animation: scroll 40s linear infinite; /* Slower because 6 items */
-  }
-  .animate-scroll:hover {
-    animation-play-state: paused;
-  }
   .mask-fade {
     mask-image: linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 5%, rgba(0,0,0,1) 95%, rgba(0,0,0,0) 100%);
     -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 5%, rgba(0,0,0,1) 95%, rgba(0,0,0,0) 100%);
