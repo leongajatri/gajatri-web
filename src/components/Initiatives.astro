@@ -16,40 +16,83 @@ const services = [
   {
     title: "HVAC &<br/>Cooling Tower",
     desc: "Perawatan berkala dan perbaikan sistem tata udara sentral serta menara pendingin guna menjamin efisiensi pendinginan maksimal.",
+    details: [
+      "Pembersihan dan overhaul Chiller & Cooling Tower",
+      "Perawatan berkala sistem tata udara sentral (AHU & FCU)",
+      "Pengecekan freon, kompresor, dan sistem kelistrikan HVAC",
+      "Analisa performa pendinginan dan efisiensi energi"
+    ],
     image: serviceHvac,
     icon: Settings
   },
   {
     title: "Swimming Pool<br/>Maintenance",
     desc: "Layanan pembersihan menyeluruh, penyeimbangan kimia air, dan perawatan rutin pompa agar kualitas air kolam senantiasa higienis.",
+    details: [
+      "Pembersihan vakum dasar dan dinding kolam renang",
+      "Pengecekan dan penyeimbangan kadar klorin & pH air",
+      "Perawatan dan perbaikan sistem pompa sirkulasi",
+      "Penggantian media filter (pasir silika/cartridge)"
+    ],
     image: servicePool,
     icon: Droplets
   },
   {
     title: "RO Water<br/>Systems",
     desc: "Solusi cerdas pengolahan air payau dan air laut menjadi pasokan air bersih siap pakai dengan teknologi filtrasi membran modern.",
+    details: [
+      "Instalasi sistem Reverse Osmosis (RO) komersial & industri",
+      "Penggantian membran RO dan pre-filter secara berkala",
+      "Desalinasi air payau dan air laut menjadi air bersih",
+      "Pengecekan TDS air dan kalibrasi sistem kontrol"
+    ],
     image: serviceBwro,
     icon: Droplet
   },
   {
     title: "Solar Panel<br/>Systems",
     desc: "Pemasangan presisi dan pemeliharaan rutin panel surya sebagai solusi energi terbarukan yang sangat ramah lingkungan dan efisien.",
+    details: [
+      "Desain dan instalasi sistem PLTS On-Grid / Off-Grid",
+      "Pembersihan modul surya untuk performa optimal",
+      "Pengecekan inverter, baterai, dan sistem kelistrikan",
+      "Monitoring performa energi yang dihasilkan"
+    ],
     image: serviceSolar,
     icon: Sun
   },
   {
     title: "MEP<br/>Installation",
     desc: "Instalasi dan perbaikan sistem mekanikal, kelistrikan, serta plumbing komersial yang teruji aman dan sesuai dengan standar industri terkini.",
+    details: [
+      "Instalasi panel listrik, trafo, dan jaringan kabel",
+      "Pemasangan sistem plumbing dan pemipaan air bersih/kotor",
+      "Perbaikan mekanikal industri dan pompa booster",
+      "Preventive maintenance berkala untuk keamanan operasional"
+    ],
     image: serviceMep,
     icon: Zap
   },
   {
     title: "Water Filter<br/>& F&B",
     desc: "Penyewaan mesin filter air dan peralatan F&B skala profesional yang dilengkapi dengan jaminan dukungan pemeliharaan secara penuh.",
+    details: [
+      "Sewa mesin filter air minum standar restoran/kafe",
+      "Instalasi dan perawatan mesin es & peralatan F&B",
+      "Garansi perbaikan penuh selama masa sewa",
+      "Layanan teknis darurat dan penggantian sparepart"
+    ],
     image: serviceFilter,
     icon: Filter
   }
 ];
+
+const servicesClient = services.map(s => ({
+  title: s.title,
+  desc: s.desc,
+  details: s.details,
+  imageSrc: s.image.src
+}));
 ---
 <section id="layanan" class="max-w-[1400px] mx-auto px-6 pt-8 pb-16 md:pt-12 md:pb-24 scroll-mt-20 overflow-hidden">
   <div class="flex flex-col-reverse lg:flex-row gap-12 lg:gap-16 items-stretch">
@@ -62,10 +105,10 @@ const services = [
         
         {/* --- Set 1 --- */}
         <div class="flex gap-6 shrink-0">
-          {services.map((service) => {
+          {services.map((service, index) => {
             const IconComponent = service.icon;
             return (
-              <div class="w-[300px] h-[480px] rounded-2xl overflow-hidden relative group/card cursor-pointer">
+              <div class="service-card w-[300px] h-[480px] rounded-2xl overflow-hidden relative group/card cursor-pointer" data-index={index}>
                 <Image src={service.image} alt={service.title.replace('<br/>', ' ')} loading="lazy" class="absolute inset-0 w-full h-full object-cover group-hover/card:scale-105 transition duration-700" />
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
                 <div class="absolute bottom-0 left-0 p-8 w-full">
@@ -82,10 +125,10 @@ const services = [
 
         {/* --- Set 2 (Duplicated for Marquee) --- */}
         <div class="flex gap-6 shrink-0" aria-hidden="true">
-          {services.map((service) => {
+          {services.map((service, index) => {
             const IconComponent = service.icon;
             return (
-              <div class="w-[300px] h-[480px] rounded-2xl overflow-hidden relative group/card cursor-pointer">
+              <div class="service-card w-[300px] h-[480px] rounded-2xl overflow-hidden relative group/card cursor-pointer" data-index={index}>
                 <Image src={service.image} alt={service.title.replace('<br/>', ' ')} loading="lazy" class="absolute inset-0 w-full h-full object-cover group-hover/card:scale-105 transition duration-700" />
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
                 <div class="absolute bottom-0 left-0 p-8 w-full">
@@ -126,7 +169,137 @@ const services = [
   </div>
 </section>
 
+<!-- Dialog Modal -->
+<dialog id="service-modal" class="backdrop:bg-black/80 backdrop:backdrop-blur-sm bg-transparent w-[96vw] max-w-none m-auto p-0 rounded-3xl shadow-2xl opacity-0 transition-all duration-300 transform scale-95 open:opacity-100 open:scale-100 hidden open:block overflow-hidden">
+  <div class="bg-white relative flex flex-col lg:flex-row h-[92vh] overflow-hidden">
+    <!-- Close Button -->
+    <button id="close-modal" class="absolute top-4 right-4 lg:top-6 lg:right-6 z-20 bg-gray-100 hover:bg-gray-200 text-gray-800 w-12 h-12 rounded-full flex items-center justify-center transition cursor-pointer shadow-sm" aria-label="Tutup modal">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+    </button>
+    
+    <!-- Image Header (Left side on Desktop) -->
+    <div class="w-full lg:w-1/2 h-56 sm:h-72 lg:h-full relative shrink-0 overflow-hidden">
+      <img id="modal-image" src="" alt="Service Image" class="w-full h-full object-cover" />
+    </div>
+    
+    <!-- Content scrollable area (Right side on Desktop) -->
+    <div class="w-full lg:w-1/2 p-6 sm:p-8 lg:p-12 flex flex-col justify-center overflow-y-auto no-scrollbar">
+      <div class="flex items-center gap-5 mb-6 pr-12">
+        <div id="modal-icon-container" class="w-16 h-16 bg-[#083d8d]/10 rounded-2xl flex items-center justify-center shrink-0">
+          <!-- Icon injected here -->
+        </div>
+        <h3 id="modal-title" class="text-3xl lg:text-4xl font-extrabold text-[#0A1128] leading-tight tracking-tight"></h3>
+      </div>
+
+      <p id="modal-desc" class="text-gray-600 text-base lg:text-lg mb-8 leading-relaxed"></p>
+      
+      <h4 class="font-bold text-[#0A1128] mb-4 text-lg lg:text-xl border-b border-gray-100 pb-3">Detail Layanan & Fasilitas</h4>
+      <ul id="modal-details" class="space-y-4 mb-8">
+        <!-- List items injected here -->
+      </ul>
+      
+      <div class="mt-auto pt-4 flex justify-start">
+        <a href="#kontak" id="modal-cta" class="bg-[#083d8d] text-white px-8 py-4 rounded-full font-bold text-[15px] hover:bg-[#062b66] transition flex items-center space-x-2 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+          <span>Pesan Layanan Sekarang</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<script define:vars={{ servicesData: servicesClient }}>
+  document.addEventListener('DOMContentLoaded', () => {
+    const cards = document.querySelectorAll('.service-card');
+    const modal = document.getElementById('service-modal');
+    const closeModalBtn = document.getElementById('close-modal');
+    const modalImage = document.getElementById('modal-image');
+    const modalTitle = document.getElementById('modal-title');
+    const modalDesc = document.getElementById('modal-desc');
+    const modalDetails = document.getElementById('modal-details');
+    const modalIconContainer = document.getElementById('modal-icon-container');
+    const modalCta = document.getElementById('modal-cta');
+
+    if (cards.length > 0 && modal) {
+      cards.forEach(card => {
+        card.addEventListener('click', () => {
+          const index = card.getAttribute('data-index');
+          const data = servicesData[index];
+          
+          if (data) {
+            // Fill image
+            modalImage.src = data.imageSrc;
+            
+            // Fill texts
+            modalTitle.innerHTML = data.title.replace('<br/>', ' ');
+            modalDesc.textContent = data.desc;
+            
+            // Fill details list
+            modalDetails.innerHTML = '';
+            data.details.forEach(detail => {
+              const li = document.createElement('li');
+              li.className = 'flex items-start text-gray-700 text-sm';
+              li.innerHTML = `
+                <svg class="w-5 h-5 text-green-500 mr-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                <span>${detail}</span>
+              `;
+              modalDetails.appendChild(li);
+            });
+            
+            // Copy SVG icon
+            const originalIcon = card.querySelector('svg');
+            if (originalIcon) {
+              modalIconContainer.innerHTML = originalIcon.outerHTML;
+              const copiedIcon = modalIconContainer.querySelector('svg');
+              if (copiedIcon) {
+                  copiedIcon.classList.remove(...copiedIcon.classList);
+                  copiedIcon.classList.add('w-8', 'h-8', 'text-[#083d8d]');
+              }
+            }
+
+            modal.classList.remove('hidden');
+            // Small timeout to allow display:block to apply before animating opacity
+            setTimeout(() => {
+              modal.showModal();
+            }, 10);
+            document.body.style.overflow = 'hidden';
+          }
+        });
+      });
+
+      const closeModal = () => {
+        modal.close();
+        setTimeout(() => {
+           modal.classList.add('hidden');
+        }, 300); // match transition duration
+        document.body.style.overflow = '';
+      };
+
+      closeModalBtn.addEventListener('click', closeModal);
+      
+      if (modalCta) {
+        modalCta.addEventListener('click', closeModal);
+      }
+
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          closeModal();
+        }
+      });
+    }
+  });
+</script>
+
 <style>
+  /* Sembunyikan scrollbar untuk modal content */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+
   @keyframes scroll {
     0% { transform: translateX(0); }
     100% { transform: translateX(calc(-50% - 12px)); }
