@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://www.gajatriindoservice.com/sitemap-index.xml
