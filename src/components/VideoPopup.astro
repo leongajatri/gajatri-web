@@ -1,0 +1,64 @@
+---
+---
+<div id="video-popup" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-sm opacity-100 transition-opacity duration-300 p-4 sm:p-6">
+  
+  <!-- Container video yang pas dengan ukuran (16:9) -->
+  <div class="relative w-full max-w-5xl aspect-video scale-100 transition-transform duration-300 shadow-2xl rounded-xl overflow-hidden bg-black" id="video-container">
+    
+    <!-- Logo & Title di Kiri Atas (Di dalam frame video) -->
+    <div class="absolute top-4 left-4 md:top-6 md:left-6 flex items-center gap-2 md:gap-3 z-20 pointer-events-none">
+      <img src="/images/logo_cropped.png" alt="Logo Gajatri" class="h-8 md:h-10 w-auto object-contain bg-white/10 rounded p-1 backdrop-blur-sm" />
+      <span class="text-white font-bold tracking-wider text-xs md:text-sm drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">PT GAJATRI INDO SERVICE</span>
+    </div>
+
+    <!-- Tombol Close (Lebih kecil) -->
+    <button id="close-popup-btn" class="absolute top-4 right-4 md:top-6 md:right-6 text-white/70 hover:text-white bg-black/20 hover:bg-black/50 backdrop-blur-sm rounded-full p-2 transition-all duration-300 transform hover:scale-110 opacity-0 pointer-events-none z-20" aria-label="Close popup">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 md:h-6 md:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+    
+    <!-- Video Player -->
+    <video id="promo-video" class="w-full h-full object-cover" controls autoplay>
+      <source src="/videos/gajatri_video.mp4" type="video/mp4" />
+      Browser Anda tidak mendukung tag video HTML.
+    </video>
+
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const videoPopup = document.getElementById('video-popup');
+    const closeBtn = document.getElementById('close-popup-btn');
+    const video = document.getElementById('promo-video') as HTMLVideoElement;
+    const container = document.getElementById('video-container');
+
+    // Menampilkan popup saat halaman dimuat
+    if (videoPopup) {
+        videoPopup.style.display = 'flex';
+    }
+
+    if (video && closeBtn && videoPopup) {
+      // Saat video selesai diputar
+      video.addEventListener('ended', () => {
+        closeBtn.classList.remove('opacity-0', 'pointer-events-none');
+        closeBtn.classList.add('opacity-100', 'pointer-events-auto');
+      });
+
+      // Menutup popup
+      closeBtn.addEventListener('click', () => {
+        if (videoPopup && container) {
+            videoPopup.classList.remove('opacity-100');
+            videoPopup.classList.add('opacity-0');
+            container.classList.remove('scale-100');
+            container.classList.add('scale-95');
+            setTimeout(() => {
+                videoPopup.style.display = 'none';
+                video.pause();
+            }, 300);
+        }
+      });
+    }
+  });
+</script>
